@@ -69,3 +69,10 @@ def count_passed_exams(scores):
             count += 1
 
     return count
+
+def calculate_pass_rate(scores):
+
+    passed_count = count_passed_exams(scores)
+    passed = passed_count / len(scores) * 100
+
+    return passed
