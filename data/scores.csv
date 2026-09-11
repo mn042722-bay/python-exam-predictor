@@ -1,0 +1,4 @@
+exam,score,study_hours,weak_topics,passed
+mock_01,58,1.5,5,False
+mock_02,67,2.0,4,False
+mock_03,74,3.0,2,True
