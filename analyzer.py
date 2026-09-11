@@ -30,3 +30,18 @@ def calculate_average(scores):
     average = total / len(scores)
 
     return average
+
+def find_highest_score(scores):
+
+    high_score = scores[0]["score"]
+
+    for row in scores:
+
+        current_score = row["score"]
+
+        if current_score > high_score:
+            high_score = current_score
+
+    return high_score
+            
+
