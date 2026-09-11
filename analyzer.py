@@ -76,3 +76,26 @@ def calculate_pass_rate(scores):
     passed = passed_count / len(scores) * 100
 
     return passed
+
+def get_latest_score(scores):
+
+    last_score = scores[-1]
+    return last_score["score"]
+
+
+def calculate_score_change(scores):
+
+    last_score = scores[-1]["score"]
+    prev_score = scores[-2]["score"]
+    return last_score - prev_score
+
+def filter_high_scores(scores):
+
+    high_scores = []
+
+    for row in scores:
+        if row["score"] >= 70:
+            high_scores.append(row)
+
+    return high_scores
+        
