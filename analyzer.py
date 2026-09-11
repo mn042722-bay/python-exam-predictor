@@ -43,5 +43,29 @@ def find_highest_score(scores):
             high_score = current_score
 
     return high_score
-            
 
+
+def find_lowest_score(scores):
+
+    low_score = scores[0]["score"]
+
+    for row in scores:
+
+        current_score = row["score"] 
+
+        if current_score < low_score:
+            low_score = current_score
+
+    return low_score
+
+def count_passed_exams(scores):
+
+    count = 0
+
+    for row in scores:
+        current_score = row["passed"]
+
+        if current_score == "True":
+            count += 1
+
+    return count
