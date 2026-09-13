@@ -1,10 +1,5 @@
 
 import csv
-import os
-
-# 実行しているスクリプトのディレクトリを取得
-base_dir = os.path.dirname(__file__)
-file_path = os.path.join(base_dir, "data", "scores.csv")
 
 def load_scores(file_path):
 
@@ -60,7 +55,7 @@ def find_lowest_score(scores):
 
     for row in scores:
 
-        current_score = row["score"] 
+        current_score = row["score"]
 
         if current_score < low_score:
             low_score = current_score
@@ -130,3 +125,35 @@ def append_score(file_path, score_data):
     with open(file_path, mode='a', encoding='utf-8', newline='') as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writerow(score_data)
+
+
+class ExamAnalyzer:
+    def __init__(self, scores):
+        self.scores = scores
+
+    def get_average(self):
+        return calculate_average(self.scores)
+
+    def get_highest_score(self):
+        return find_highest_score(self.scores)
+
+    def get_lowest_score(self):
+        return find_lowest_score(self.scores)
+
+    def get_passed_count(self):
+        return count_passed_exams(self.scores)
+
+    def get_pass_rate(self):
+        return calculate_pass_rate(self.scores)
+
+    def get_latest_exam_score(self):
+        return get_latest_score(self.scores)
+
+    def get_score_change(self):
+        return calculate_score_change(self.scores)
+
+    def get_high_scores(self):
+        return filter_high_scores(self.scores)
+
+    def get_points_to_pass(self):
+        return calculate_points_to_pass(self.scores)

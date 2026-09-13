@@ -2,3 +2,5 @@ exam,score,study_hours,weak_topics,passed
 mock_01,58,1.5,5,False
 mock_02,67,2.0,4,False
 mock_03,74,3.0,2,True
+mock_04,65,3.0,2,False
+mock_05,80,3.5,1,True
