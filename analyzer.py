@@ -15,7 +15,16 @@ def load_scores(file_path):
         for row in reader:
             num = int(row["score"])
             row["score"] = num
+            hours = float(row["study_hours"])
+            row["study_hours"] = hours
+            topics = int(row["weak_topics"])
+            row["weak_topics"] = topics
+            row["passed"] = row["passed"] == "True"
             new_list.append(row)
+
+
+        if len(new_list) == 0:
+            raise ValueError("CSVにデータがありません")
 
     return new_list
 
@@ -65,7 +74,7 @@ def count_passed_exams(scores):
     for row in scores:
         current_score = row["passed"]
 
-        if current_score == "True":
+        if current_score:
             count += 1
 
     return count
@@ -85,9 +94,14 @@ def get_latest_score(scores):
 
 def calculate_score_change(scores):
 
-    last_score = scores[-1]["score"]
-    prev_score = scores[-2]["score"]
-    return last_score - prev_score
+    score = len(scores)
+
+    if score < 2:
+        return None
+    else:
+        last_score = scores[-1]["score"]
+        prev_score = scores[-2]["score"]
+        return last_score - prev_score
 
 def filter_high_scores(scores):
 
@@ -98,4 +112,21 @@ def filter_high_scores(scores):
             high_scores.append(row)
 
     return high_scores
-        
+
+def calculate_points_to_pass(scores, passing_score=70):
+
+    last_score = get_latest_score(scores)
+
+    if last_score >= passing_score:
+        return 0
+    else:
+        return passing_score - last_score
+
+
+def append_score(file_path, score_data):
+
+    fieldnames = ("exam", "score", "study_hours", "weak_topics", "passed")
+
+    with open(file_path, mode='a', encoding='utf-8', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writerow(score_data)
