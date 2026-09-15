@@ -157,3 +157,14 @@ class ExamAnalyzer:
 
     def get_points_to_pass(self):
         return calculate_points_to_pass(self.scores)
+
+class DetailedExamAnalyzer(ExamAnalyzer):
+    def find_first_passing_index(self, passing_score=70):
+        index = 0
+
+        while index < len(self.scores):
+            if self.scores[index]["score"] >= passing_score:
+                return index
+            index += 1
+
+        return None
